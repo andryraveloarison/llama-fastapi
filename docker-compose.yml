@@ -4,18 +4,12 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - .:/app
+      - /usr/local/bin/ollama:/usr/local/bin/ollama   
+      - ~/.ollama:/root/.ollama 
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     environment:
       - PYTHONUNBUFFERED=1
-    depends_on:
-      - ollama
-    networks:
-      - app-network
-
-  ollama:
-    image: ollama/ollama:latest
-    volumes:
-      - ./data:/data
     networks:
       - app-network
 
